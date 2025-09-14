@@ -9,14 +9,14 @@ on:
       - ".github/workflows/backend_ci.yml"
 
 env:
-  # Secrets: set these in GitHub → Settings → Secrets and variables → Actions
-  ACR_NAME: ${{ sit722binulacr }}                         # e.g., sit722binulacr
-  ACR_LOGIN_SERVER: ${{ sit722binulacr.azurecr.io }}         # e.g., sit722binulacr.azurecr.io
-  IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}         # unique tag per run
+  ACR_NAME: sit722binulacr                    # short registry name
+  ACR_LOGIN_SERVER: sit722binulacr.azurecr.io # FQDN used in image tags
+  IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}
 
 jobs:
   test_and_lint_backends:
     runs-on: ubuntu-latest
+
     services:
       product_db:
         image: postgres:15
@@ -30,6 +30,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
         ports: [ "5432:5432" ]
+
       order_db:
         image: postgres:15
         env:
@@ -94,8 +95,14 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Login to Azure Container Registry
+      - name: Login to Azure Container Registry (CLI)
         run: az acr login --name ${{ env.ACR_NAME }}
+
+      # Optional: sanity check docker auth (will print current registry logins)
+      - name: Show docker logins
+        run: |
+          echo "Logged in registries:"
+          docker info | sed -n '/Registries:/,/^$/p' || true
 
       - name: Build and Push Product Service Image
         run: |
@@ -114,4 +121,4 @@ jobs:
       - name: Logout from Azure
         if: always()
         run: az logout
-# trigger
+# trigger bump 001
