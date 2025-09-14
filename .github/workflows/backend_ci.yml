@@ -126,7 +126,7 @@ jobs:
 
     # Login to Azure Container Registry (ACR)
     - name: Login to Azure Container Registry
-      run: az acr login --name ${{ env.ACR_LOGIN_SERVER }}
+  run: az acr login --name sit722binulacr
 
     # Build and Push Docker image for Product Service
     - name: Build and Push Product Service Image
@@ -148,3 +148,4 @@ jobs:
 # Trigger CI run Sun Sep 14 15:05:52 AEST 2025
 # Trigger CI run Sun Sep 14 15:15:44 AEST 2025
 # Trigger CI run Sun Sep 14 15:33:24 AEST 2025
+# Trigger CI run Sun Sep 14 21:03:38 AEST 2025
