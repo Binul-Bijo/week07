@@ -10,8 +10,8 @@ on:
 
 env:
   # Secrets: set these in GitHub → Settings → Secrets and variables → Actions
-  ACR_NAME: ${{ secrets.ACR_NAME }}                         # e.g., sit722binulacr
-  ACR_LOGIN_SERVER: ${{ secrets.ACR_LOGIN_SERVER }}         # e.g., sit722binulacr.azurecr.io
+  ACR_NAME: ${{ sit722binulacr }}                         # e.g., sit722binulacr
+  ACR_LOGIN_SERVER: ${{ sit722binulacr.azurecr.io }}         # e.g., sit722binulacr.azurecr.io
   IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}         # unique tag per run
 
 jobs:
