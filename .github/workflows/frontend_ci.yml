@@ -9,8 +9,8 @@ on:
       - ".github/workflows/frontend_ci.yml"
 
 env:
-  ACR_NAME: ${{ sit722binulacr }}                         # e.g., sit722binulacr
-  ACR_LOGIN_SERVER: ${{ sit722binulacr.azurecr.io }}         # e.g., sit722binulacr.azurecr.io
+  ACR_NAME: ${{ sit722binulacr }}                         
+  ACR_LOGIN_SERVER: ${{ sit722binulacr.azurecr.io }}         
   IMAGE_TAG: ${{ github.sha }}-${{ github.run_id }}
 
 jobs:
